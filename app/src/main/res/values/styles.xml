@@ -1,50 +1,77 @@
+میخام طراحی کدمو ببینم عکسش بساز 
 <!--
-  The XML theme now carries the same Orbit values as AppAppearance.ORBIT.
+  Theme.MsnGuard — CR7 Edition
+  ----------------------------
+  Palette rebuilt around a night-match football aesthetic: pitch-neon green as
+  the hero colour, electric gold as the trophy/celebration accent, deep
+  near-black as the stadium-at-night canvas. Every framework-painted surface —
+  splash window, AlertDialogs, ripples, container chips — pulls from here, so
+  nothing flashes an old colour on launch or inside a dialog.
 
-  It used to hold the old green-grey palette (#A4D8BB on #101411) while the Kotlin
-  UI drew the approved dark-glass + neon look. Anything the framework paints for
-  us — the pre-inflate splash window, AlertDialogs, edit-text handles, ripple
-  defaults — used those stale colours, so the app flashed a different green on
-  launch and dialogs came up in a palette that no longer exists anywhere else.
-
-  Parent is DarkActionBar-free *Dark*, not DayNight: the layout is designed for a
-  dark canvas only, and DayNight let a phone in light mode hand the dialogs white
-  surfaces with near-white text on them.
+  Parent is DarkActionBar-free *Dark*, not DayNight: the layout is built for a
+  dark canvas only, and DayNight would hand dialogs a white surface if the
+  phone is in light mode system-wide.
 -->
 <resources>
     <style name="Theme.MsnGuard" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <!-- mint / neon accents, straight from the approved mock -->
-        <item name="colorPrimary">#4FE3C1</item>
-        <item name="colorOnPrimary">#04070B</item>
-        <item name="colorSecondary">#9B8CFF</item>
-        <item name="colorError">#FF6B7F</item>
-        <!-- void / raised / recessed surfaces -->
-        <item name="android:colorBackground">#04070B</item>
-        <item name="colorSurface">#0B1116</item>
-        <item name="colorOnSurface">#EAF6F3</item>
-        <item name="colorSurfaceVariant">#111A20</item>
-        <item name="colorOnSurfaceVariant">#9DB0B5</item>
-        <item name="colorOutline">#1C2429</item>
-        <item name="android:navigationBarColor">#04070B</item>
-        <item name="android:statusBarColor">#04070B</item>
+
+        <!-- Hero: pitch-neon green, the signature colour of the whole UI -->
+        <item name="colorPrimary">#00FF87</item>
+        <item name="colorOnPrimary">#001A0A</item>
+        <item name="colorPrimaryContainer">#0A3D22</item>
+        <item name="colorOnPrimaryContainer">#B8FFDA</item>
+
+        <!-- Secondary: electric gold, used for highlights and "win" states -->
+        <item name="colorSecondary">#FFD60A</item>
+        <item name="colorOnSecondary">#1A1400</item>
+        <item name="colorSecondaryContainer">#3D3200</item>
+        <item name="colorOnSecondaryContainer">#FFF3B8</item>
+
+        <!-- Tertiary: cool violet-blue, keeps the palette from being just green+gold -->
+        <item name="colorTertiary">#4FD1FF</item>
+        <item name="colorOnTertiary">#00212B</item>
+        <item name="colorTertiaryContainer">#003544</item>
+        <item name="colorOnTertiaryContainer">#B8ECFF</item>
+
+        <item name="colorError">#FF2D55</item>
+        <item name="colorOnError">#2B000A</item>
+
+        <!-- Void / raised / recessed surfaces — stadium under floodlights at night -->
+        <item name="android:colorBackground">#000000</item>
+        <item name="colorSurface">#0D1410</item>
+        <item name="colorOnSurface">#F0FFF6</item>
+        <item name="colorSurfaceVariant">#131F19</item>
+        <item name="colorOnSurfaceVariant">#8FE8B4</item>
+        <item name="colorOutline">#1C3527</item>
+        <item name="colorOutlineVariant">#0F1E15</item>
+
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:statusBarColor">#000000</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Ripple picks up the hero green instead of the Material default grey -->
+        <item name="colorControlHighlight">#3300FF87</item>
+
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MsnGuard.AlertDialog</item>
    </style>
 
     <!--
-      The window the system shows before onCreate finishes. Same void background
-      as the canvas, so launching the app does not flash a lighter panel before
-      the Orbit console appears.
+      Pre-onCreate splash window. Same void background as the canvas so the
+      cold-start flash and the first composed frame are the same black —
+      no lighter panel flickers in before the Orbit/CR7 console appears.
     -->
     <style name="Theme.MsnGuard.Starting" parent="Theme.MsnGuard">
-        <item name="android:windowBackground">#04070B</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">#000000</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@mipmap/ic_launcher</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="31">#000000</item>
    </style>
 
     <!--
       Invisible, non-animating window used only to collapse the Quick Settings
-      shade (see ShadeCollapseActivity). It must never paint anything: a normal
+      shade (see ShadeCollapseActivity). Must never paint anything — a normal
       theme would flash the void background over whatever is behind the shade.
     -->
     <style name="Theme.MsnGuard.Invisible" parent="android:Theme.Translucent.NoTitleBar">
@@ -58,9 +85,10 @@
 
     <style name="ThemeOverlay.MsnGuard.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MsnGuard.Dialog</item>
-        <item name="colorSurface">#0B1116</item>
-        <item name="colorOnSurface">#EAF6F3</item>
-        <item name="colorPrimary">#4FE3C1</item>
+        <item name="colorSurface">#0D1410</item>
+        <item name="colorOnSurface">#F0FFF6</item>
+        <item name="colorPrimary">#00FF87</item>
+        <item name="colorSecondary">#FFD60A</item>
    </style>
 
     <style name="ShapeAppearance.MsnGuard.Dialog" parent="ShapeAppearance.Material3.MediumComponent">
@@ -70,41 +98,58 @@
     <!--
       Porcelain: the light half of the theme switch.
 
-      This is a second explicit theme, NOT a values-night/ split. The palette is
-      the user's choice inside the app, not the phone's night setting, so a
-      resource qualifier would pick the wrong one whenever the two disagree.
+      A second explicit theme, NOT a values-night/ split. The palette is a
+      user choice inside the app, not the phone's night setting — a resource
+      qualifier would pick the wrong one whenever the two disagree.
       MainActivity applies whichever of these matches AppAppearance.mode()
-      before super.onCreate().
-
-      Values mirror AppAppearance.PORCELAIN exactly. Anything the framework
-      paints for us — dialogs, edit-text handles, ripple defaults, the pre-inflate
-      window — reads from here, and a mismatch here is how a white app ends up
-      with one black dialog.
+      before super.onCreate(). Every value here mirrors the dark set's
+      structure exactly so nothing goes unstyled when the user flips modes.
     -->
     <style name="Theme.MsnGuard.Light" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <item name="colorPrimary">#0E9C82</item>
+
+        <item name="colorPrimary">#00B85C</item>
         <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorSecondary">#6B5BD6</item>
-        <item name="colorError">#B3261E</item>
-        <item name="android:colorBackground">#EEF1F4</item>
+        <item name="colorPrimaryContainer">#B8FFDA</item>
+        <item name="colorOnPrimaryContainer">#003D1F</item>
+
+        <item name="colorSecondary">#E6A700</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSecondaryContainer">#FFF3B8</item>
+        <item name="colorOnSecondaryContainer">#3D3200</item>
+
+        <item name="colorTertiary">#0087B0</item>
+        <item name="colorOnTertiary">#FFFFFF</item>
+        <item name="colorTertiaryContainer">#B8ECFF</item>
+        <item name="colorOnTertiaryContainer">#00374A</item>
+
+        <item name="colorError">#D6293F</item>
+        <item name="colorOnError">#FFFFFF</item>
+
+        <item name="android:colorBackground">#F4F9F6</item>
         <item name="colorSurface">#FFFFFF</item>
-        <item name="colorOnSurface">#111A1F</item>
+        <item name="colorOnSurface">#08150D</item>
         <item name="colorSurfaceVariant">#FFFFFF</item>
-        <item name="colorOnSurfaceVariant">#4E6069</item>
-        <item name="colorOutline">#E0E6EA</item>
-        <item name="android:navigationBarColor">#EEF1F4</item>
-        <item name="android:statusBarColor">#EEF1F4</item>
-        <!-- Dark icons in the bars: the bars are now near-white. -->
+        <item name="colorOnSurfaceVariant">#3E5C4A</item>
+        <item name="colorOutline">#DCEBE1</item>
+        <item name="colorOutlineVariant">#EEF5F0</item>
+
+        <item name="android:navigationBarColor">#F4F9F6</item>
+        <item name="android:statusBarColor">#F4F9F6</item>
+        <!-- Dark icons in the bars: the bars are now near-white -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
+
+        <item name="colorControlHighlight">#2200B85C</item>
+
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MsnGuard.Light.AlertDialog</item>
    </style>
 
     <style name="ThemeOverlay.MsnGuard.Light.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MsnGuard.Dialog</item>
         <item name="colorSurface">#FFFFFF</item>
-        <item name="colorOnSurface">#111A1F</item>
-        <item name="colorPrimary">#087060</item>
+        <item name="colorOnSurface">#08150D</item>
+        <item name="colorPrimary">#00B85C</item>
+        <item name="colorSecondary">#E6A700</item>
    </style>
 </resources>
