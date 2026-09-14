@@ -1,7 +1,6 @@
-میخام طراحی کدمو ببینم عکسش بساز 
 <!--
   Theme.MsnGuard — CR7 Edition
-  ----------------------------
+  ============================
   Palette rebuilt around a night-match football aesthetic: pitch-neon green as
   the hero colour, electric gold as the trophy/celebration accent, deep
   near-black as the stadium-at-night canvas. Every framework-painted surface —
@@ -12,7 +11,7 @@
   dark canvas only, and DayNight would hand dialogs a white surface if the
   phone is in light mode system-wide.
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.MsnGuard" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:fontFamily">sans</item>
 
@@ -60,7 +59,7 @@
     <!--
       Pre-onCreate splash window. Same void background as the canvas so the
       cold-start flash and the first composed frame are the same black —
-      no lighter panel flickers in before the Orbit/CR7 console appears.
+      no lighter panel flickers in before the console appears.
     -->
     <style name="Theme.MsnGuard.Starting" parent="Theme.MsnGuard">
         <item name="android:windowBackground">#000000</item>
