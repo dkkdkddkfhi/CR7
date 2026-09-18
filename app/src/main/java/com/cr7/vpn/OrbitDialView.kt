@@ -552,8 +552,8 @@ class OrbitDialView(
         }
 
         for (i in 0 until 6) {
-            val angle = phase + i * Math.PI / 3.0
-            val width = (kotlin.math.abs(cos(angle)) * r * 0.82f).coerceAtLeast(r * 0.06f)
+            val angle = phase.toDouble() + i * Math.PI / 3.0
+            val width = (kotlin.math.abs(kotlin.math.cos(angle)) * r.toDouble() * 0.82).coerceAtLeast(r.toDouble() * 0.06).toFloat()
             bounds.set(cx - width, cy - r * 0.86f, cx + width, cy + r * 0.86f)
             canvas.drawOval(bounds, paint)
         }
