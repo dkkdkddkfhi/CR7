@@ -1,0 +1,44 @@
+name: CR7 Android Build
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build CR7 APKs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout CR7
+        uses: actions/checkout@v4
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install Android build tools
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;26.3.11579264" "cmake;3.22.1"
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,x86_64-linux-android
+      - name: Install cargo-ndk
+        run: cargo install cargo-ndk
+      - name: Make Gradle executable
+        run: chmod +x gradlew
+      - name: Build Debug APKs
+        run: ./gradlew assembleDebug --no-daemon
+      - name: Upload CR7 APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: CR7-debug-apks
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 30
