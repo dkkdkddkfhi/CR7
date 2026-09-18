@@ -50,6 +50,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.net.toUri
 import android.widget.LinearLayout.LayoutParams
 import androidx.core.content.FileProvider
 import java.io.File
