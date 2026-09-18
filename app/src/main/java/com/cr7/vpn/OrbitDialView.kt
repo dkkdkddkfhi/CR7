@@ -70,11 +70,9 @@ class OrbitDialView(
             } else {
                 tickReveal = 0f
             }
-            if (value == State.CONNECTING || value == State.CONNECTED || value == State.DEGRADED) {
-                startLoop()
-            } else {
-                stopLoop()
-            }
+            // Keep the idle orb gently alive so the launch screen never falls
+            // back to a static remnant of the previous theme.
+            startLoop()
             invalidate()
         }
 
@@ -495,6 +493,11 @@ class OrbitDialView(
         canvas.drawCircle(cx, cy, r, paint)
         paint.shader = null
 
+        // Live 3D globe: longitude/latitude bands are clipped to the spherical
+        // core and shifted by the orbit phase. This gives the launch screen a
+        // real depth cue while remaining GPU-independent.
+        drawOrbitalGlobe(canvas, cx, cy, r, accent, active)
+
         // Bevel edge: brighter at the top; accent ring when active.
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 1.4f * density
@@ -519,6 +522,47 @@ class OrbitDialView(
             paint.color = accent
             canvas.drawCircle(cx, cy, r + dp(6), paint)
         }
+    }
+
+    private fun drawOrbitalGlobe(
+        canvas: Canvas,
+        cx: Float,
+        cy: Float,
+        r: Float,
+        accent: Int,
+        active: Boolean,
+    ) {
+        val save = canvas.save()
+        corePath.reset()
+        corePath.addCircle(cx, cy, r * 0.985f, Path.Direction.CW)
+        canvas.clipPath(corePath)
+
+        val phase = loopFraction * TWO_PI
+        val grid = if (active) Sculpt.withAlpha(accent, 0.18f) else Sculpt.withAlpha(palette.muted, 0.13f)
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = 0.65f * density
+        paint.color = grid
+
+        for (i in -2..2) {
+            val latitude = i / 3f
+            val y = cy + latitude * r * 0.58f
+            val width = r * kotlin.math.sqrt((1f - latitude * latitude).coerceAtLeast(0.12f))
+            bounds.set(cx - width, y - r * 0.055f, cx + width, y + r * 0.055f)
+            canvas.drawOval(bounds, paint)
+        }
+
+        for (i in 0 until 6) {
+            val angle = phase + i * Math.PI / 3.0
+            val width = (kotlin.math.abs(cos(angle)) * r * 0.82f).coerceAtLeast(r * 0.06f)
+            bounds.set(cx - width, cy - r * 0.86f, cx + width, cy + r * 0.86f)
+            canvas.drawOval(bounds, paint)
+        }
+
+        paint.strokeWidth = 1.25f * density
+        paint.color = Sculpt.withAlpha(if (active) accent else light.bevelColor, if (active) 0.38f else 0.22f)
+        bounds.set(cx - r * 0.89f, cy - r * 0.89f, cx + r * 0.89f, cy + r * 0.89f)
+        canvas.drawArc(bounds, -58f + phase * 57.3f, 72f, false, paint)
+        canvas.restoreToCount(save)
     }
 
     private fun drawContents(
@@ -739,7 +783,7 @@ class OrbitDialView(
         // A view can be detached mid-connection (screen off, returning from
         // Recents) and reattached still CONNECTED. Without this the halo and
         // sheen stay frozen.
-        if (state == State.CONNECTING || state == State.CONNECTED || state == State.DEGRADED) startLoop()
+        startLoop()
     }
 
     override fun onDetachedFromWindow() {
@@ -752,7 +796,7 @@ class OrbitDialView(
     private fun startLoop() {
         if (loopAnimator != null) return
         loopAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = if (state == State.CONNECTING) 1_150 else 4_400
+            duration = if (state == State.CONNECTING) 1_150 else 8_000
             repeatCount = ValueAnimator.INFINITE
             interpolator = null
             addUpdateListener {
