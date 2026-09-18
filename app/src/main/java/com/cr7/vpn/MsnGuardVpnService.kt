@@ -3793,11 +3793,22 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
         reconnectTask?.cancel(false)
         reconnectTask = null
         nativeExitWasUnexpected = false
-        // The protocol of THIS config, parsed before anything consults it:
-        // exitPin() compares the saved pin against it, and a stale value from
-        // the previous session would let a pin saved for one transport be
-        // injected into another.
-        currentProtocol = config.substringAfter("\"protocol\":\"").substringBefore('"').uppercase()
+        // Parse the protocol before anything consults it. The old substring
+        // extraction silently returned an empty string for pretty-printed or
+        // reordered JSON, which sent the session down the wrong native branch
+        // and left the UI waiting until a watchdog timeout. Treat malformed
+        // configuration as a controlled connect failure instead.
+        val parsedConfig = runCatching { JSONObject(config) }.getOrElse {
+            connected.set(false)
+            failAndStop(Strings.t("Invalid tunnel configuration"))
+            return
+        }
+        currentProtocol = parsedConfig.optString("protocol").trim().uppercase()
+        if (currentProtocol.isBlank()) {
+            connected.set(false)
+            failAndStop(Strings.t("No tunnel protocol was selected"))
+            return
+        }
         currentVpnIp = ""
         // Exit-country preference: latched for the whole session, like
         // proxyMode below. The rotation must not change target mid-flight, and
