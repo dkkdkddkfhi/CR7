@@ -19,13 +19,13 @@ kotlin {
 }
 
 android {
-    namespace = "com.msnguard.vpn"
+    namespace = "com.cr7.vpn"
     compileSdk = 36
     buildToolsVersion = "36.0.0"
     ndkVersion = "26.3.11579264"
 
     defaultConfig {
-        applicationId = "com.msnguard.vpn"
+        applicationId = "com.cr7.vpn"
         minSdk = 26
         targetSdk = 36
         versionCode = 211
