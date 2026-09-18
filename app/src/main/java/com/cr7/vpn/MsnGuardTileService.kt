@@ -45,7 +45,7 @@ class MsnGuardTileService : TileService() {
             this,
             R.drawable.ic_notification
         )
-        tile.label = Strings.t("MSN-GUARD")
+        tile.label = Strings.t("CR7")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             tile.subtitle = if (isConnected) Strings.t("Connected") else Strings.t("Disconnected")
         }

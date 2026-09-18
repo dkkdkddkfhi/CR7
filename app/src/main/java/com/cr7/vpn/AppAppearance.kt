@@ -37,7 +37,7 @@ import com.cr7.vpn.profiled
  * has a `…Text` sibling. On [ORBIT] the two are the same colour; on [PORCELAIN]
  * the text sibling is darkened until it clears 4.5:1 on both the card and the
  * canvas. Shapes keep the vivid colour, which is what makes the light theme
- * still look like MSN-GUARD instead of a generic white app.
+ * still look like CR7 instead of a generic white app.
  */
 object AppAppearance {
 

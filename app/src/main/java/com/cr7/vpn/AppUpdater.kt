@@ -64,7 +64,7 @@ class AppUpdater(private val activity: Activity) {
                         when {
                             release == null -> showMessage(Strings.t("No update available"), Strings.t("No compatible release was found"))
                             !isNewer(release.version, appVersion()) ->
-                                showMessage(Strings.t("You're up to date"), Strings.tf("MSN-GUARD %s is installed", appVersion()))
+                                showMessage(Strings.t("You're up to date"), Strings.tf("CR7 %s is installed", appVersion()))
                             else -> announceUpdate(release)
                         }
                     }
@@ -83,7 +83,7 @@ class AppUpdater(private val activity: Activity) {
         dialogBuilder()
             .setTitle(Strings.t("Update available"))
             .setMessage(
-                Strings.tf("MSN-GUARD %s has been released. You are on %s.", release.version, appVersion()) + "\n\n" +
+                Strings.tf("CR7 %s has been released. You are on %s.", release.version, appVersion()) + "\n\n" +
                     Strings.t("Tapping Update opens the download in your browser. Open the downloaded file to install it.")
             )
             .setNegativeButton(Strings.t("Later"), null)
@@ -118,7 +118,7 @@ class AppUpdater(private val activity: Activity) {
             connectTimeout = 10_000
             readTimeout = 20_000
             setRequestProperty("Accept", "application/vnd.github+json")
-            setRequestProperty("User-Agent", "MSN-GUARD-Android")
+            setRequestProperty("User-Agent", "CR7-Android")
         }
         try {
             if (connection.responseCode == HttpURLConnection.HTTP_NOT_FOUND) return null
@@ -203,8 +203,8 @@ class AppUpdater(private val activity: Activity) {
 
     private companion object {
         const val RELEASE_HOST = "api.github.com"
-        const val RELEASE_URL = "https://$RELEASE_HOST/repos/mbm110/MSN-GUARD/releases/latest"
-        const val RELEASES_PAGE_URL = "https://github.com/mbm110/MSN-GUARD/releases/latest"
+        const val RELEASE_URL = "https://$RELEASE_HOST/repos/mbm110/CR7/releases/latest"
+        const val RELEASES_PAGE_URL = "https://github.com/dkkdkddkfhi/CR7/releases/latest"
 
         fun isNewer(remote: String, local: String): Boolean {
             val remoteParts = remote.split('.', '-', '+').map { it.toIntOrNull() ?: 0 }

@@ -2340,7 +2340,7 @@ class MainActivity : Activity() {
         Thread({
             val result = runCatching {
                 val dir = File(cacheDir, "logs").apply { mkdirs() }
-                val target = File(dir, "msn-guard-log.txt")
+                val target = File(dir, "cr7-log.txt")
                 target.writeText(encryptedExport())
                 target
             }
@@ -3597,7 +3597,7 @@ class MainActivity : Activity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
             ).apply { topMargin = dp(10) })
             body.addView(navRow(Strings.t("Source on GitHub"), iconRes = R.drawable.ic_github) {
-                openLink("https://github.com/mbm110/MSN-GUARD")
+                openLink("https://github.com/dkkdkddkfhi/CR7")
             }, LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,

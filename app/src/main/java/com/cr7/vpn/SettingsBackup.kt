@@ -54,7 +54,7 @@ import org.json.JSONObject
 object SettingsBackup {
 
     /** Marker so a file from another app cannot be read as ours. */
-    const val APP_MARKER = "MSN-GUARD"
+    const val APP_MARKER = "CR7"
 
     /**
      * Format revision. Bumped only for a change a previous build could not read;
@@ -64,7 +64,7 @@ object SettingsBackup {
 
     /** Suggested filename; the version makes a folder of backups self-sorting. */
     fun suggestedFileName(version: String): String =
-        "msn-guard-settings-v$version.json"
+        "cr7-settings-v$version.json"
 
     /**
      * The preference files a backup covers, in the order they are applied.

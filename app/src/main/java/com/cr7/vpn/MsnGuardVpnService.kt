@@ -2383,7 +2383,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
                     val address = Tun2SocksManager.selectPrivateAddress()
                     ConnectionLog.record("Chain: creating TUN before either tunnel starts")
                     tun = Builder()
-                        .setSession("MSN-GUARD")
+                        .setSession("CR7")
                         .setMtu(Tun2SocksManager.VPN_INTERFACE_MTU)
                         .addAddress(address.ipAddress, address.prefixLength)
                         .addRoute("0.0.0.0", 0)
@@ -2487,7 +2487,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
                 val address = Tun2SocksManager.selectPrivateAddress()
                 ConnectionLog.record("Tor: creating TUN before Tor starts")
                 tun = Builder()
-                    .setSession("MSN-GUARD")
+                    .setSession("CR7")
                     .setMtu(Tun2SocksManager.VPN_INTERFACE_MTU)
                     .addAddress(address.ipAddress, address.prefixLength)
                     .addRoute("0.0.0.0", 0)
@@ -2658,7 +2658,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
                 val address = Tun2SocksManager.selectPrivateAddress()
                 ConnectionLog.record("SHARD: creating TUN before xray starts")
                 tun = Builder()
-                    .setSession("MSN-GUARD")
+                    .setSession("CR7")
                     .setMtu(Tun2SocksManager.VPN_INTERFACE_MTU)
                     .addAddress(address.ipAddress, address.prefixLength)
                     .addRoute("0.0.0.0", 0)
@@ -4078,7 +4078,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
 
                     ConnectionLog.record("Creating TUN interface BEFORE Psiphon starts")
                     tun = Builder()
-                        .setSession("MSN-GUARD")
+                        .setSession("CR7")
                         .setMtu(Tun2SocksManager.VPN_INTERFACE_MTU)
                         .addAddress(address.ipAddress, address.prefixLength)
                         .addRoute("0.0.0.0", 0)
@@ -4227,7 +4227,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
                 }
                 ConnectionLog.record("Creating Android VPN interface")
                 tun = Builder()
-                    .setSession("MSN-GUARD")
+                    .setSession("CR7")
                     .setMtu(1280)
                     // applyTunnelAddresses replaces the hardcoded /32 + /128
                     // pair: v0.8.0 identities can carry a real prefix length,
@@ -4511,7 +4511,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
         try {
             tun?.close()
             tun = Builder()
-                .setSession("MSN-GUARD — Kill Switch")
+                .setSession("CR7 — Kill Switch")
                 .setMtu(1280)
                 .addAddress("100.64.0.1", 32)
                 .addRoute("0.0.0.0", 0)
@@ -5340,7 +5340,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
             .setSmallIcon(R.drawable.ic_notification)
             .setLargeIcon(appBadge())
             // Tints the small icon and the header text in the app's own accent,
-            // which is what makes the row read as MSN-GUARD's at a glance.
+            // which is what makes the row read as CR7's at a glance.
             .setColor(NOTIFICATION_ACCENT)
             .setContentIntent(pendingIntent)
             .setOngoing(true)
@@ -5446,7 +5446,7 @@ class MsnGuardVpnService : VpnService(), NativeCore.CoreCallback, PsiphonTunnel.
         // keeps the neon ring from being cropped.
         val inset = (-size * 0.25f).toInt()
         val bounds = android.graphics.Rect(inset, inset, size - inset, size - inset)
-        listOf(R.drawable.msnguard_icon_bg, R.drawable.msnguard_icon_fg).forEach { id ->
+        listOf(R.drawable.ic_cr7_logo).forEach { id ->
             getDrawable(id)?.apply {
                 setBounds(bounds)
                 draw(canvas)

@@ -445,7 +445,7 @@ object CoreConfig {
     fun portRejection(port: Int): String? = when {
         port < 1024 -> "Ports below 1024 need root"
         port > 65535 -> "Highest port is 65535"
-        port in RESERVED_PORTS -> "$port is used internally by MSN-GUARD"
+        port in RESERVED_PORTS -> "$port is used internally by CR7"
         else -> null
     }
 

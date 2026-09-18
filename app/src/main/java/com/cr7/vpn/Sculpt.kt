@@ -261,7 +261,7 @@ object Sculpt {
     }
 
     /**
-     * The standard MSN-GUARD raised glass surface. [radius] is in dp.
+     * The standard CR7 raised glass surface. [radius] is in dp.
      *
      * [accent] is a lit outline used for active states and wins over [stroke].
      * [pressed] forces the recessed lighting for callers that manage their own

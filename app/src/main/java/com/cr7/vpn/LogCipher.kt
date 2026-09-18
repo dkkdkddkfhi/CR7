@@ -32,9 +32,9 @@ import android.util.Base64
 object LogCipher {
 
     /** Fixed key, 256 bits. Ship it verbatim in the key file. */
-    private const val KEY_MATERIAL = "MSN-GUARD-log-cipher-v2.2.0-7a3f9c1e"
+    private const val KEY_MATERIAL = "CR7-log-cipher-v2.2.0-7a3f9c1e"
 
-    private const val MAGIC = "MSN-GUARD-ENC-V1"
+    private const val MAGIC = "CR7-ENC-V1"
 
     private const val IV_BYTES = 12
     private const val TAG_BITS = 128
@@ -88,10 +88,10 @@ object LogCipher {
     fun writeKeyFile(dest: File) {
         dest.writeText(
             """
-MSN-GUARD · Log Key
+CR7 · Log Key
 ===================
 
-This file decrypts connection logs exported by MSN-GUARD ${appVersionReadable()}.
+This file decrypts connection logs exported by CR7 ${appVersionReadable()}.
 
 What the log is
 ---------------
@@ -113,7 +113,7 @@ How to decrypt
 --------------
 An encrypted log looks like three lines:
 
-  MSN-GUARD-ENC-V1
+  CR7-ENC-V1
   <base64 IV>
   <base64 ciphertext>
 
