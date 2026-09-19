@@ -54,6 +54,18 @@ class KouroshSceneView @JvmOverloads constructor(
             c.drawLine(cx - offset, wingY + dp(8f), cx - offset - dp(20f), wingY + dp(18f + i * 2f), gold)
             c.drawLine(cx + offset, wingY + dp(8f), cx + offset + dp(20f), wingY + dp(18f + i * 2f), gold)
         }
+        // Stylised Cyrus profile: crown, nose, beard and robe, all vector strokes.
+        val px = w * .17f; val py = h * .33f
+        gold.color = Color.argb(72, 246, 217, 139); gold.strokeWidth = dp(2f)
+        c.drawOval(RectF(px - dp(30f), py - dp(42f), px + dp(18f), py + dp(24f)), gold)
+        c.drawLine(px - dp(28f), py - dp(36f), px + dp(18f), py - dp(36f), gold)
+        c.drawLine(px - dp(22f), py - dp(52f), px + dp(12f), py - dp(52f), gold)
+        c.drawLine(px - dp(20f), py - dp(52f), px - dp(28f), py - dp(36f), gold)
+        c.drawLine(px + dp(12f), py - dp(52f), px + dp(18f), py - dp(36f), gold)
+        c.drawLine(px + dp(18f), py - dp(5f), px + dp(33f), py + dp(2f), gold)
+        c.drawArc(RectF(px - dp(6f), py + dp(8f), px + dp(30f), py + dp(44f)), 15f, 150f, false, gold)
+        c.drawLine(px - dp(26f), py + dp(28f), px - dp(62f), py + dp(98f), gold)
+        c.drawLine(px + dp(10f), py + dp(24f), px + dp(58f), py + dp(98f), gold)
         // Minimal shield emblem in the center.
         val shield = Path().apply { moveTo(cx, cy - dp(54f)); lineTo(cx + dp(42f), cy - dp(34f)); lineTo(cx + dp(34f), cy + dp(34f)); lineTo(cx, cy + dp(58f)); lineTo(cx - dp(34f), cy + dp(34f)); lineTo(cx - dp(42f), cy - dp(34f)); close() }
         fill.color = Color.argb(180, 8, 7, 5); c.drawPath(shield, fill)

@@ -2982,6 +2982,10 @@ class MainActivity : Activity() {
                 setPadding(dp(4), 0, 0, 0)
             })
         }
+        page.addView(KouroshSceneView(this).apply { alpha = 0.28f }, FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            dp(300),
+        ).apply { topMargin = dp(44) })
         // PROFILE sits above everything, because the profile decides what every
         // row below it means. It is the only section that rebuilds the whole
         // page on a change, so it has to be read first and built first.
@@ -5444,6 +5448,27 @@ class MainActivity : Activity() {
         ), LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
             leftMargin = dp(4); bottomMargin = dp(16)
         })
+        val scaleTitle = label("TEXT SIZE  ·  ${Math.round(FontChoice.scale(this) * 100)}%", 12f, primary, TypefaceStyle.MEDIUM)
+        content.addView(scaleTitle, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+            leftMargin = dp(4); bottomMargin = dp(4)
+        })
+        content.addView(SeekBar(this).apply {
+            max = 4
+            progress = Math.round((FontChoice.scale(this@MainActivity) - 0.9f) / 0.1f)
+            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seek: SeekBar?, value: Int, fromUser: Boolean) {
+                    val scale = 0.9f + value * 0.1f
+                    FontChoice.setScale(this@MainActivity, scale)
+                    scaleTitle.text = "TEXT SIZE  ·  ${Math.round(scale * 100)}%"
+                }
+                override fun onStartTrackingTouch(seek: SeekBar?) = Unit
+                override fun onStopTrackingTouch(seek: SeekBar?) {
+                    closeFontScreen(); recreate()
+                }
+            })
+            progressTintList = android.content.res.ColorStateList.valueOf(primary)
+            thumbTintList = android.content.res.ColorStateList.valueOf(primary)
+        }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(42)).apply { bottomMargin = dp(14) })
 
         FontChoice.Family.entries.forEach { family ->
             val selected = FontChoice.current(this) == family
@@ -7282,11 +7307,11 @@ class MainActivity : Activity() {
         singleLine: Boolean = false,
     ): TextView = TextView(this).apply {
         this.text = text
-        this.textSize = textSize
+        this.textSize = textSize * FontChoice.scale(this@MainActivity)
         setTextColor(color)
         // Persian/Chinese ship offline fonts; see Typefaces for why per-language.
         if (AppLanguage.current() != "en") {
-            setLineSpacing(0f, Typefaces.lineHeightMult())
+            setLineSpacing(0f, Typefaces.lineHeightMult() * if (FontChoice.current(this@MainActivity) == FontChoice.Family.IRAN_NASTALIQ || FontChoice.current(this@MainActivity) == FontChoice.Family.DAST_NEVIS) 1.25f else 1f)
         }
         if (singleLine) {
             setSingleLine(true)
