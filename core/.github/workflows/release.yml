@@ -327,7 +327,7 @@ jobs:
 
             Quick start (Termux, one-line install):
 
-               curl -fsSL https://raw.githubusercontent.com/CluvexStudio/aether/main/aether.sh -o aether.sh && chmod +x aether.sh && ./aether.sh install
+               curl -fsSL https://raw.githubusercontent.com/dkkdkddkfhi/Kourosh-AE/main/aether.sh -o aether.sh && chmod +x aether.sh && ./aether.sh install
 
             Quick start (other platforms):
 
