@@ -681,6 +681,10 @@ class MainActivity : Activity() {
         }
         val header = createHeader()
         val console = createConnectionConsole()
+        mainRoot.addView(KouroshSceneView(this), FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            dp(440),
+        ).apply { topMargin = dp(42) })
         // The console can still scroll, but it is meant not to need it: the dial
         // shrinks first (see [fitConsoleToViewport]) and scrolling is only the
         // last resort on a screen too short even for the smallest dial. Clipping
