@@ -886,7 +886,7 @@ class MainActivity : Activity() {
             typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
         }
         val subtitle = TextView(this).apply {
-            text = Strings.t("PRIVATE NETWORK")
+            text = "PRIVATE NETWORK  •  PERSIAN HERITAGE"
             textSize = 11f
             setTextColor(Color.parseColor("#A89870"))
             gravity = Gravity.CENTER
@@ -912,18 +912,18 @@ class MainActivity : Activity() {
             .alpha(1f)
             .scaleX(1f)
             .scaleY(1f)
-            .setDuration(140)
+            .setDuration(220)
             .setInterpolator(PathInterpolator(0.2f, 0f, 0f, 1f))
             .withEndAction {
                 lockup.animate()
                     .scaleX(1.05f)
                     .scaleY(1.05f)
-                        .setDuration(180)
+                        .setDuration(300)
                     .setInterpolator(PathInterpolator(0.4f, 0f, 0.2f, 1f))
                     .withEndAction {
                         overlay.animate()
                             .alpha(0f)
-                            .setDuration(120)
+                            .setDuration(160)
                             .withEndAction {
                                 pageHost.removeView(overlay)
                                 orbitDial.requestFocus()
@@ -4542,11 +4542,11 @@ class MainActivity : Activity() {
         val sheet = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(24), dp(24), dp(24), dp(24))
-            background = roundedBackground(SURFACE, 28, SURFACE)
+            background = roundedBackground(SURFACE, 28, PRIMARY)
         }
-        sheet.addView(label(Strings.t("Language"), 22f, INK, TypefaceStyle.MEDIUM))
+        sheet.addView(label("KOUROSH-AE", 22f, PRIMARY_TEXT, TypefaceStyle.MEDIUM))
         sheet.addView(
-            label(Strings.t("Choose the app's language. You can change it later in Settings."), 14f, MUTED),
+            label(Strings.t("Choose the app's language. You can change it later in Settings."), 14f, INK),
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
