@@ -1,4 +1,4 @@
-name: CR7 Android Build
+name: Kourosh-AE Android Build
 
 on:
   push:
@@ -10,10 +10,10 @@ permissions:
 
 jobs:
   build:
-    name: Build CR7 APKs
+    name: Build Kourosh-AE APKs
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout CR7
+      - name: Checkout Kourosh-AE
         uses: actions/checkout@v4
       - name: Set up Java 17
         uses: actions/setup-java@v4
@@ -36,10 +36,10 @@ jobs:
         run: chmod +x gradlew
       - name: Build Debug APKs
         run: ./gradlew assembleDebug --no-daemon
-      - name: Upload CR7 APKs
+      - name: Upload Kourosh-AE APKs
         uses: actions/upload-artifact@v4
         with:
-          name: CR7-debug-apks
+          name: Kourosh-AE-debug-apks
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 30

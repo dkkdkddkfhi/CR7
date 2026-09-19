@@ -17,6 +17,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MSN-GUARD"
+rootProject.name = "KOUROSH-AE"
 include(":app")
 

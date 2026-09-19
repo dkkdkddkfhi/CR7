@@ -12,7 +12,7 @@
   surfaces with near-white text on them.
 -->
 <resources>
-    <style name="Theme.MsnGuard" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.KouroshAe" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <!-- mint / neon accents, straight from the approved mock -->
         <item name="colorPrimary">#E7B84B</item>
@@ -30,7 +30,7 @@
         <item name="android:statusBarColor">#080808</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MsnGuard.AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.KouroshAe.AlertDialog</item>
    </style>
 
     <!--
@@ -38,7 +38,7 @@
       as the canvas, so launching the app does not flash a lighter panel before
       the Orbit console appears.
     -->
-    <style name="Theme.MsnGuard.Starting" parent="Theme.MsnGuard">
+    <style name="Theme.KouroshAe.Starting" parent="Theme.KouroshAe">
         <item name="android:windowBackground">#080808</item>
    </style>
 
@@ -47,7 +47,7 @@
       shade (see ShadeCollapseActivity). It must never paint anything: a normal
       theme would flash the void background over whatever is behind the shade.
     -->
-    <style name="Theme.MsnGuard.Invisible" parent="android:Theme.Translucent.NoTitleBar">
+    <style name="Theme.KouroshAe.Invisible" parent="android:Theme.Translucent.NoTitleBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -56,14 +56,14 @@
         <item name="android:backgroundDimEnabled">false</item>
    </style>
 
-    <style name="ThemeOverlay.MsnGuard.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MsnGuard.Dialog</item>
+    <style name="ThemeOverlay.KouroshAe.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.KouroshAe.Dialog</item>
         <item name="colorSurface">#151515</item>
         <item name="colorOnSurface">#F7F0DF</item>
         <item name="colorPrimary">#E7B84B</item>
    </style>
 
-    <style name="ShapeAppearance.MsnGuard.Dialog" parent="ShapeAppearance.Material3.MediumComponent">
+    <style name="ShapeAppearance.KouroshAe.Dialog" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerSize">28dp</item>
    </style>
 
@@ -81,7 +81,7 @@
       window — reads from here, and a mismatch here is how a white app ends up
       with one black dialog.
     -->
-    <style name="Theme.MsnGuard.Light" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.KouroshAe.Light" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="colorPrimary">#0E9C82</item>
         <item name="colorOnPrimary">#FFFFFF</item>
@@ -98,11 +98,11 @@
         <!-- Dark icons in the bars: the bars are now near-white. -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MsnGuard.Light.AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.KouroshAe.Light.AlertDialog</item>
    </style>
 
-    <style name="ThemeOverlay.MsnGuard.Light.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MsnGuard.Dialog</item>
+    <style name="ThemeOverlay.KouroshAe.Light.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.KouroshAe.Dialog</item>
         <item name="colorSurface">#FFFFFF</item>
         <item name="colorOnSurface">#111A1F</item>
         <item name="colorPrimary">#087060</item>

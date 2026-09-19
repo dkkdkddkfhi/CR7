@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">CR7</string>
-    <string name="vpn_channel_name">CR7</string>
-    <string name="vpn_notification">CR7 正在运行</string>
+    <string name="app_name">Kourosh-AE</string>
+    <string name="vpn_channel_name">Kourosh-AE</string>
+    <string name="vpn_notification">Kourosh-AE 正在运行</string>
 
     <!-- Quick Tile strings -->
-    <string name="vpn_tile_label">CR7</string>
+    <string name="vpn_tile_label">Kourosh-AE</string>
     <string name="vpn_connected">已连接</string>
     <string name="vpn_disconnected">未连接</string>
     <string name="vpn_connecting">正在连接…</string>

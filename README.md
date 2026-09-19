@@ -1,10 +1,10 @@
-# CR7 VPN for Android
+# Kourosh-AE VPN for Android
 
 ![Build](https://img.shields.io/badge/build-GitHub%20Actions-E7B84B?style=for-the-badge&logo=github&logoColor=080808)
 ![Android](https://img.shields.io/badge/Android-8.0%2B-080808?style=for-the-badge&logo=android&logoColor=E7B84B)
 ![License](https://img.shields.io/badge/license-AGPL--3.0-FF5C5C?style=for-the-badge)
 
-**CR7** یک کلاینت VPN بومی اندروید با رابطی سریع و هویت بصری مشکی، طلایی و قرمز است. برنامه با `VpnService` اندروید، ترافیک دستگاه را مدیریت می‌کند و چند مسیر انتقال را در یک کنسول واحد در اختیار کاربر می‌گذارد.
+**Kourosh-AE** یک کلاینت VPN بومی اندروید با رابطی سریع و هویت بصری مشکی، طلایی و قرمز است. برنامه با `VpnService` اندروید، ترافیک دستگاه را مدیریت می‌کند و چند مسیر انتقال را در یک کنسول واحد در اختیار کاربر می‌گذارد.
 
 ## امکانات
 
@@ -13,12 +13,12 @@
 - پشتیبانی از TCP، UDP و QUIC در سطح دستگاه
 - انتخاب کشور خروج، حالت‌های زنجیره‌ای و تونل تفکیکی برای اپ‌ها
 - Quick Settings tile برای اتصال و قطع سریع
-- رابط بازطراحی‌شده CR7 با تم تاریک و روشن
+- رابط بازطراحی‌شده Kourosh-AE با تم تاریک و روشن
 - ساخت خودکار APK با GitHub Actions
 
 ## دریافت APK
 
-به بخش **Actions → CR7 Android Build → Artifacts** بروید و artifact با نام `CR7-debug-apks` را دانلود کنید. این workflow یک APK Debug قابل نصب برای معماری‌های arm64، armv7 و x86_64 می‌سازد و به کلید خصوصی نیاز ندارد.
+به بخش **Actions → Kourosh-AE Android Build → Artifacts** بروید و artifact با نام `Kourosh-AE-debug-apks` را دانلود کنید. این workflow یک APK Debug قابل نصب برای معماری‌های arm64، armv7 و x86_64 می‌سازد و به کلید خصوصی نیاز ندارد.
 
 ## ساخت محلی
 
@@ -36,7 +36,7 @@ cargo install cargo-ndk
 
 | بخش | مسئولیت |
 |---|---|
-| `app/src/main/java/` | رابط CR7 و چرخه حیات VPN |
+| `app/src/main/java/` | رابط Kourosh-AE و چرخه حیات VPN |
 | `app/src/main/res/` | تم، لوگو و منابع رابط |
 | `app/src/main/cpp/` | پل JNI و tun2socks |
 | `core/aether/` | هسته شبکه Rust |
@@ -44,7 +44,7 @@ cargo install cargo-ndk
 
 ## حریم خصوصی و امنیت
 
-CR7 برای مدیریت اتصال VPN روی دستگاه طراحی شده است. کد و سیاست‌های مسیریابی را بررسی کنید و فقط نسخه‌هایی را نصب کنید که از منبع مورد اعتماد دریافت شده‌اند.
+Kourosh-AE برای مدیریت اتصال VPN روی دستگاه طراحی شده است. کد و سیاست‌های مسیریابی را بررسی کنید و فقط نسخه‌هایی را نصب کنید که از منبع مورد اعتماد دریافت شده‌اند.
 
 ## کانال رسمی
 

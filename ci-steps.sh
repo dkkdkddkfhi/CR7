@@ -4,7 +4,7 @@ cd /root/MSN-VPN-Fresh || exit 1
 URL=$(git config --get remote.guard.url)
 CRED=${URL#https://}; CRED=${CRED%%@*}
 TOK=${CRED##*:}
-API=https://api.github.com/repos/mbm110/MSN-GUARD
+API=https://api.github.com/repos/mbm110/KOUROSH-AE
 RUN=$1
 echo "=== jobs / step conclusions ==="
 curl -s -H "Authorization: Bearer $TOK" "$API/actions/runs/$RUN/jobs" \

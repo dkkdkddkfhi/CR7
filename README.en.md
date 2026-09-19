@@ -1,10 +1,10 @@
-# CR7 VPN for Android
+# Kourosh-AE VPN for Android
 
 ![Build](https://img.shields.io/badge/build-GitHub%20Actions-E7B84B?style=for-the-badge&logo=github&logoColor=080808)
 ![Android](https://img.shields.io/badge/Android-8.0%2B-080808?style=for-the-badge&logo=android&logoColor=E7B84B)
 ![License](https://img.shields.io/badge/license-AGPL--3.0-FF5C5C?style=for-the-badge)
 
-**CR7** is a native Android VPN client with a fast console and a black, gold, and red visual identity. It uses Android `VpnService` to manage device traffic and provides multiple transport paths in one focused interface.
+**Kourosh-AE** is a native Android VPN client with a fast console and a black, gold, and red visual identity. It uses Android `VpnService` to manage device traffic and provides multiple transport paths in one focused interface.
 
 ## Features
 
@@ -13,12 +13,12 @@
 - Device-wide TCP, UDP, and QUIC support
 - Exit-country selection, chained modes, and per-app split tunneling
 - Quick Settings tile for instant connect and disconnect
-- Fully refreshed CR7 dark and light themes
+- Fully refreshed Kourosh-AE dark and light themes
 - Reproducible APK builds through GitHub Actions
 
 ## Download an APK
 
-Open **Actions → CR7 Android Build → Artifacts** and download `CR7-debug-apks`. The workflow builds installable Debug APKs for arm64, armv7, and x86_64 without requiring a private signing key.
+Open **Actions → Kourosh-AE Android Build → Artifacts** and download `Kourosh-AE-debug-apks`. The workflow builds installable Debug APKs for arm64, armv7, and x86_64 without requiring a private signing key.
 
 ## Build locally
 
@@ -36,7 +36,7 @@ The APKs are written to `app/build/outputs/apk/debug/`.
 
 | Area | Responsibility |
 |---|---|
-| `app/src/main/java/` | CR7 UI and Android VPN lifecycle |
+| `app/src/main/java/` | Kourosh-AE UI and Android VPN lifecycle |
 | `app/src/main/res/` | Theme, logo, and UI resources |
 | `app/src/main/cpp/` | JNI bridge and tun2socks |
 | `core/aether/` | Rust networking core |
@@ -44,7 +44,7 @@ The APKs are written to `app/build/outputs/apk/debug/`.
 
 ## Privacy and security
 
-CR7 is designed to manage a device VPN connection. Review the source and routing policy before use, and install builds only from sources you trust.
+Kourosh-AE is designed to manage a device VPN connection. Review the source and routing policy before use, and install builds only from sources you trust.
 
 ## Official channel
 

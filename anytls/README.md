@@ -1,6 +1,6 @@
-# anytls-client — MSN-GUARD SHARD sidecar
+# anytls-client — KOUROSH-AE SHARD sidecar
 
-Production client for the AnyTLS protocol, built for MSN-GUARD's SHARD
+Production client for the AnyTLS protocol, built for KOUROSH-AE's SHARD
 transport. Vendored from the reference implementation
 ([anytls-go](https://github.com/anytls/anytls-go), commit `fd6167a`) with a
 hardened main: real TLS verification against the Android system trust store
@@ -41,7 +41,7 @@ URI format as well.
 
 Upstream anytls-go carries **no LICENSE file** (checked 2026-09-13; the repo
 returns no license via the GitHub API). Its dependency sing is GPLv3.
-Vendored here for internal MSN-GUARD builds under the same understanding as
+Vendored here for internal KOUROSH-AE builds under the same understanding as
 the other reference code the app already vendors (badvpn, lwIP); resolve
 before any public release that ships `libanytls.so` — either get an
 upstream licence decision or drop the feature from public builds.

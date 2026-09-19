@@ -1,13 +1,13 @@
-# CR7 Android design contract
+# Kourosh-AE Android design contract
 
 ## Intent
 
-CR7 should feel like a calm, trustworthy dark Android system tool. The home screen is a
+Kourosh-AE should feel like a calm, trustworthy dark Android system tool. The home screen is a
 single-purpose connection console: the connection state is visible at a glance, the main
 action is physically obvious, and live connection facts (exit IP, country, data, duration)
 are readable without scrolling.
 
-This is CR7's own visual system. Any third-party app is an interaction reference only;
+This is Kourosh-AE's own visual system. Any third-party app is an interaction reference only;
 do not copy its code, wording, logo, or branding.
 
 ## Foundations

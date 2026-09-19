@@ -52,7 +52,7 @@ public class Tun2SocksJniLoader {
             String socksServerAddress,
             String udpgwServerAddress,
             int udpgwTransparentDNS,
-            // CR7: when 1, udpgw accepts only DNS (UDP port 53); all other
+            // Kourosh-AE: when 1, udpgw accepts only DNS (UDP port 53); all other
             // UDP is dropped before it can consume a connection slot. Tor sets
             // this because its SOCKS front cannot carry non-DNS UDP anyway.
             int udpgwDnsOnly);

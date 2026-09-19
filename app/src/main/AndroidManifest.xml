@@ -50,16 +50,16 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/ic_cr7_logo"
-        android:label="CR7"
-        android:roundIcon="@drawable/ic_cr7_logo"
-        android:theme="@style/Theme.MsnGuard">
+        android:icon="@drawable/kourosh_ae_logo"
+        android:label="Kourosh-AE"
+        android:roundIcon="@drawable/kourosh_ae_logo"
+        android:theme="@style/Theme.KouroshAe">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden"
-            android:theme="@style/Theme.MsnGuard.Starting">
+            android:theme="@style/Theme.KouroshAe.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -88,14 +88,14 @@
         <activity
             android:name=".ShadeCollapseActivity"
             android:exported="false"
-            android:theme="@style/Theme.MsnGuard.Invisible"
+            android:theme="@style/Theme.KouroshAe.Invisible"
             android:taskAffinity=""
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:launchMode="singleInstance" />
 
         <service
-            android:name=".MsnGuardVpnService"
+            android:name=".KouroshAeVpnService"
             android:exported="false"
             android:foregroundServiceType="specialUse"
             android:permission="android.permission.BIND_VPN_SERVICE">
@@ -112,7 +112,7 @@
        </service>
 
         <service
-            android:name=".MsnGuardTileService"
+            android:name=".KouroshAeTileService"
             android:icon="@drawable/ic_notification"
             android:label="@string/vpn_tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
