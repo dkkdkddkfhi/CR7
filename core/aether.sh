@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -uo pipefail
 
-readonly REPO="CluvexStudio/Aether"
+readonly REPO="dkkdkddkfhi/Kourosh-AE"
 readonly BIN_NAME="aether"
 readonly PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
 readonly INSTALL_PATH="${PREFIX}/bin/${BIN_NAME}"

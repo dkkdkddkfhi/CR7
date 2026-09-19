@@ -277,7 +277,7 @@ AETHER_QUICK_RECONNECT=1 ./target/release/aether --masque
 docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data \
   -e AETHER_PROTOCOL=masque \
   -e AETHER_SCAN=balanced \
-  ghcr.io/cluvexstudio/aether:latest
+  ghcr.io/dkkdkddkfhi/aether:latest
 ```
 *(پرچم `-it` برای وقتی که متغیرهای محیطی رو از قبل ندادی و نیاز به پاسخ دادن به سؤالات تعاملی داری، ضروریه.)*
 

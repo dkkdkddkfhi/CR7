@@ -5,7 +5,7 @@
 ### اینترنت آزاد برای همه:))
 **[راهنمای فارسی](README.fa.md)** · **[English Guide](Docs/DOCS.en.md)** · **[راهنمای کامل فارسی](Docs/DOCS.fa.md)**
 
-Telegram: https://t.me/CluvexStudio
+Telegram: https://t.me/Kourosh-AE
 
 Aether is a censorship circumvention client designed for heavily restricted networks. It automatically discovers reachable routes, establishes an encrypted tunnel, and exposes a local SOCKS5 proxy for your applications.
 
@@ -35,7 +35,7 @@ Prebuilt binaries are available on the Releases page for:
 ### Termux (Android) — one-line install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/CluvexStudio/aether/main/aether.sh -o aether.sh && chmod +x aether.sh && ./aether.sh install
+curl -fsSL https://raw.githubusercontent.com/Kourosh-AE/aether/main/aether.sh -o aether.sh && chmod +x aether.sh && ./aether.sh install
 ```
 
 This detects your device architecture, downloads the matching release, verifies its checksum, and installs `aether` into `$PREFIX/bin`. Run it afterwards with:
@@ -85,7 +85,7 @@ The `-v aether-data:/data` volume keeps the generated WARP identity between runs
 Pull and run the pre-built image (interactive mode is required for initial setup):
 
 ```bash
-docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data ghcr.io/cluvexstudio/aether:latest
+docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data ghcr.io/dkkdkddkfhi/aether:latest
 ```
 
 You can also bypass prompts by providing environment variables:
@@ -94,7 +94,7 @@ You can also bypass prompts by providing environment variables:
 docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data \
   -e AETHER_PROTOCOL=masque \
   -e AETHER_SCAN=balanced \
-  ghcr.io/cluvexstudio/aether:latest
+  ghcr.io/dkkdkddkfhi/aether:latest
 ```
 
 If you prefer to build the image manually from source:
@@ -157,7 +157,7 @@ Detailed documentation is available in:
 
 ## Credits
 
-Developed by **CluvexStudio**. :))
+Developed by **Kourosh-AE**. :))
 
 MASQUE support is built on top of Cloudflare's **Quiche** library.
 

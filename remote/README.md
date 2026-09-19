@@ -7,7 +7,7 @@ no release, no version bump.**
 Read by `RemotePolicy.kt`. The URL is pinned to the `master` branch of this repo:
 
 ```
-https://raw.githubusercontent.com/mbm110/KOUROSH-AE/master/remote/policy.json
+https://raw.githubusercontent.com/dkkdkddkfhi/KOUROSH-AE/master/remote/policy.json
 ```
 
 ## Fields

@@ -10,7 +10,7 @@ val targetAbis = (project.findProperty("targetAbi") as String?)
     ?.map(String::trim)
     ?.filter(String::isNotEmpty)
     ?: listOf("arm64-v8a", "armeabi-v7a", "x86_64")
-val releaseKeystore = project.findProperty("aetheryKeystore") as String?
+val releaseKeystore = project.findProperty("kouroshAeKeystore") as String?
 
 kotlin {
     compilerOptions {
@@ -96,11 +96,11 @@ android {
         signingConfigs {
             create("release") {
                 storeFile = rootProject.file(releaseKeystore)
-                storePassword = System.getenv("AETHERY_KEYSTORE_PASSWORD")
+                storePassword = System.getenv("KOUROSH_AE_KEYSTORE_PASSWORD")
                     ?: envProps.getProperty("storePassword")
-                keyAlias = System.getenv("AETHERY_KEY_ALIAS")
+                keyAlias = System.getenv("KOUROSH_AE_KEY_ALIAS")
                     ?: envProps.getProperty("keyAlias")
-                keyPassword = System.getenv("AETHERY_KEY_PASSWORD")
+                keyPassword = System.getenv("KOUROSH_AE_KEY_PASSWORD")
                     ?: envProps.getProperty("keyPassword")
             }
         }

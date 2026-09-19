@@ -7,7 +7,7 @@ RUN_ID="${1:?usage: ci-artifacts.sh <run_id>}"
 URL=$(git config --get remote.guard.url)
 TOKEN=$(printf '%s' "$URL" | sed -E 's#https://([^@]*)@github.*#\1#' | sed -E 's#^[^:]*:##')
 curl -s -H "Authorization: Bearer $TOKEN" \
-  "https://api.github.com/repos/mbm110/KOUROSH-AE/actions/runs/${RUN_ID}/artifacts" \
+  "https://api.github.com/repos/dkkdkddkfhi/KOUROSH-AE/actions/runs/${RUN_ID}/artifacts" \
   | python3 -c '
 import json,sys
 d=json.load(sys.stdin)

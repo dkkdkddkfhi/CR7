@@ -36,7 +36,7 @@ Aether یک کلاینت دور زدن سانسور اینترنت است که �
 این دستور رو کپی کن و توی ترموکس بزن:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/CluvexStudio/aether/main/aether.sh -o aether.sh && chmod +x aether.sh && ./aether.sh install
+curl -fsSL https://raw.githubusercontent.com/Kourosh-AE/aether/main/aether.sh -o aether.sh && chmod +x aether.sh && ./aether.sh install
 ```
 
 این اسکریپت خودش معماری دستگاهت رو تشخیص می‌ده، نسخه‌ی مناسب رو دانلود می‌کنه، چک‌سامش رو تأیید می‌کنه و `aether` رو توی `$PREFIX/bin` نصب می‌کنه. بعدش با دستور زیر اجراش کن:
@@ -87,7 +87,7 @@ target/release/aether
 دریافت و اجرای ایمیج از پیش‌ساخته‌شده (برای تنظیمات اولیه به حالت تعاملی نیاز است):
 
 ```bash
-docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data ghcr.io/cluvexstudio/aether:latest
+docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data ghcr.io/dkkdkddkfhi/aether:latest
 ```
 
 همچنین می‌توانید با ارسال متغیرهای محیطی از پرسش‌های اولیه عبور کنید:
@@ -96,7 +96,7 @@ docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data ghcr.io/cluvexstudio/
 docker run -it -p 127.0.0.1:1819:1819 -v aether-data:/data \
   -e AETHER_PROTOCOL=masque \
   -e AETHER_SCAN=balanced \
-  ghcr.io/cluvexstudio/aether:latest
+  ghcr.io/dkkdkddkfhi/aether:latest
 ```
 
 در صورتی که ترجیح می‌دهید ایمیج را خودتان بیلد کنید:
@@ -159,11 +159,11 @@ curl -x socks5h://127.0.0.1:1819 https://www.cloudflare.com/cdn-cgi/trace
 
 ## سازندگان
 
-توسعه داده شده توسط **CluvexStudio**. :))
+توسعه داده شده توسط **Kourosh-AE**. :))
 
 بخش MASQUE این پروژه بر پایه کتابخانه **Quiche** از Cloudflare توسعه یافته است.
 
-تلگرام: https://t.me/CluvexStudio
+تلگرام: https://t.me/Kourosh-AE
 
 ## مشارکت
 

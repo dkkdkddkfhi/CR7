@@ -203,7 +203,7 @@ class AppUpdater(private val activity: Activity) {
 
     private companion object {
         const val RELEASE_HOST = "api.github.com"
-        const val RELEASE_URL = "https://$RELEASE_HOST/repos/mbm110/Kourosh-AE/releases/latest"
+        const val RELEASE_URL = "https://$RELEASE_HOST/repos/dkkdkddkfhi/Kourosh-AE/releases/latest"
         const val RELEASES_PAGE_URL = "https://github.com/dkkdkddkfhi/Kourosh-AE/releases/latest"
 
         fun isNewer(remote: String, local: String): Boolean {
