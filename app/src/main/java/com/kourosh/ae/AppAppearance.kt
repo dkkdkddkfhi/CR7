@@ -133,30 +133,30 @@ object AppAppearance {
     )
 
     val ORBIT = Palette(
-        canvas = 0xFF080808.toInt(),
-        surface = 0xFF151515.toInt(),
-        surfaceVariant = 0xFF202020.toInt(),
-        ink = 0xFFF7F0DF.toInt(),
-        muted = 0xFFB7AD9A.toInt(),
-        divider = 0xFF3A3326.toInt(),
-        primary = 0xFFE7B84B.toInt(),
-        primaryContainer = 0xFF080808.toInt(),
-        selectedSurface = 0xFF080808.toInt(),
-        connected = 0xFF6FE7A2.toInt(),
-        connectedContainer = 0xFF173525.toInt(),
-        faint = 0xFF877F70.toInt(),
-        mint = 0xFFE7B84B.toInt(),
-        violet = 0xFFE08A5B.toInt(),
-        amber = 0xFFFFD166.toInt(),
-        danger = 0xFFFF5C5C.toInt(),
+        canvas = 0xFF050505.toInt(),
+        surface = 0xFF0B0A08.toInt(),
+        surfaceVariant = 0xFF12100C.toInt(),
+        ink = 0xFFF3E6C4.toInt(),
+        muted = 0xFFA89870.toInt(),
+        divider = 0xFF5B4522.toInt(),
+        primary = 0xFFF6D98B.toInt(),
+        primaryContainer = 0xFF0B0A08.toInt(),
+        selectedSurface = 0xFF17150E.toInt(),
+        connected = 0xFF22D3C5.toInt(),
+        connectedContainer = 0xFF06303A.toInt(),
+        faint = 0xFF786B4F.toInt(),
+        mint = 0xFFD4A64A.toInt(),
+        violet = 0xFF8A6420.toInt(),
+        amber = 0xFFF6D98B.toInt(),
+        danger = 0xFFB3372F.toInt(),
         // On the dark canvas the vivid accents already read as text (10-11:1),
         // so no separate text ramp — except the failure headline, which the app
         // has always drawn in a softer red than the dial's danger ring.
-        error = 0xFFFFB4AB.toInt(),
+        error = 0xFFF2A39B.toInt(),
         // Neon frame accents: bright enough to read as a lit outline on the
         // near-black canvas, dimmer than a text colour would need to be.
-        neonBlue = 0xFFE7B84B.toInt(),
-        neonViolet = 0xFFFF5C5C.toInt(),
+        neonBlue = 0xFFF6D98B.toInt(),
+        neonViolet = 0xFF8A6420.toInt(),
         lighting = Sculpt.DARK_LIGHTING,
     )
 

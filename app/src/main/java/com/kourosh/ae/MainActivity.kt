@@ -206,6 +206,7 @@ class MainActivity : Activity() {
         }
     }
     private var showingSettings = false
+    private var fontPage: View? = null
     /**
      * Settings rows that outlive the builder that created them.
      *
@@ -3561,6 +3562,10 @@ class MainActivity : Activity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
             ).apply { topMargin = dp(8) })
+            body.addView(navRow(Strings.t("Font"), FontChoice.current(this@MainActivity).label) { openFontScreen() }, LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            ).apply { topMargin = dp(8) })
         }, LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -5406,6 +5411,89 @@ class MainActivity : Activity() {
         trafficMonthValue = null
     }
 
+    private fun openFontScreen() {
+        fontPage?.let(pageHost::removeView)
+        val page = FrameLayout(this).apply {
+            setBackgroundColor(CANVAS)
+            isClickable = true
+        }
+        val scroll = ScrollView(this).apply {
+            isVerticalScrollBarEnabled = false
+            overScrollMode = View.OVER_SCROLL_NEVER
+        }
+        val content = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(24), dp(16), dp(24), dp(32))
+        }
+        content.addView(LinearLayout(this).apply {
+            gravity = Gravity.CENTER_VERTICAL
+            addView(createHeaderBackButton { closeFontScreen() }, LinearLayout.LayoutParams(dp(48), dp(48)))
+            addView(label(Strings.t("Font"), 24f, INK, TypefaceStyle.MEDIUM).apply { setPadding(dp(4), 0, 0, 0) })
+        })
+        content.addView(label(
+            Strings.t("Choose the font used across the interface. Missing optional files use a safe system fallback."),
+            13f, MUTED,
+        ), LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+            leftMargin = dp(4); bottomMargin = dp(16)
+        })
+
+        FontChoice.Family.entries.filter { it != FontChoice.Family.VAZIRMATN }.forEach { family ->
+            val selected = FontChoice.current(this) == family
+            val row = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(dp(18), dp(14), dp(18), dp(14))
+                isClickable = true
+                isFocusable = true
+                background = Sculpt.sculptedBackground(
+                    resources.displayMetrics.density,
+                    if (selected) Sculpt.withAlpha(primary, 0.10f) else SURFACE,
+                    16,
+                    if (selected) primary else DIVIDER,
+                )
+                setOnClickListener {
+                    FontChoice.select(this@MainActivity, family)
+                    closeFontScreen()
+                    recreate()
+                }
+            }
+            val title = TextView(this).apply {
+                text = if (family.available) family.label else "${family.label} · ${Strings.t("file not added")}" 
+                textSize = 15f
+                typeface = if (family.available) FontChoice.regular(this@MainActivity) else Typefaces.medium(this@MainActivity)
+                setTextColor(if (selected) primary else INK)
+            }
+            row.addView(title)
+            listOf(
+                "این یک متن آزمایشی با قلم انتخابی شماست",
+                "This is a test text with your selected font",
+                "Это тестовый текст выбранным вами шрифтом",
+            ).forEach { sample ->
+                row.addView(TextView(this).apply {
+                    text = sample
+                    textSize = 14f
+                    typeface = if (family.available) FontChoice.regular(this@MainActivity) else Typeface.DEFAULT
+                    setTextColor(MUTED)
+                    textDirection = View.TEXT_DIRECTION_ANY_RTL
+                    setLineSpacing(0f, if (family == FontChoice.Family.DAST_NEVIS || family == FontChoice.Family.IRAN_NASTALIQ) 1.8f else 1.25f)
+                    setPadding(0, dp(4), 0, dp(2))
+                })
+            }
+            content.addView(row, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                bottomMargin = dp(10)
+            })
+        }
+        scroll.addView(content)
+        page.addView(scroll, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        fontPage = page
+        pageHost.addView(page)
+        page.requestApplyInsets()
+        animatePageOpen(page)
+    }
+
+    private fun closeFontScreen() {
+        fontPage?.let { animatePageClose(it) { fontPage = null } }
+    }
+
     /**
      * The DNS screen (v2.0.0).
      *
@@ -6220,6 +6308,7 @@ class MainActivity : Activity() {
 
     private fun handleBack(): Boolean {
         when {
+            fontPage != null -> closeFontScreen()
             splitTunnelAppsPage != null -> closeSplitTunnelAppsScreen()
             splitTunnelPage != null -> closeSplitTunnelScreen()
             trafficMonitorPage != null -> closeTrafficMonitorScreen()

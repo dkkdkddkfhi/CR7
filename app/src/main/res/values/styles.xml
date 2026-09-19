@@ -15,19 +15,19 @@
     <style name="Theme.KouroshAe" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <!-- mint / neon accents, straight from the approved mock -->
-        <item name="colorPrimary">#E7B84B</item>
-        <item name="colorOnPrimary">#080808</item>
-        <item name="colorSecondary">#E08A5B</item>
-        <item name="colorError">#FF6B7F</item>
+        <item name="colorPrimary">#F6D98B</item>
+        <item name="colorOnPrimary">#050505</item>
+        <item name="colorSecondary">#22D3C5</item>
+        <item name="colorError">#B3372F</item>
         <!-- void / raised / recessed surfaces -->
-        <item name="android:colorBackground">#080808</item>
-        <item name="colorSurface">#151515</item>
-        <item name="colorOnSurface">#F7F0DF</item>
-        <item name="colorSurfaceVariant">#202020</item>
-        <item name="colorOnSurfaceVariant">#B7AD9A</item>
-        <item name="colorOutline">#3A3326</item>
-        <item name="android:navigationBarColor">#080808</item>
-        <item name="android:statusBarColor">#080808</item>
+        <item name="android:colorBackground">#050505</item>
+        <item name="colorSurface">#0B0A08</item>
+        <item name="colorOnSurface">#F3E6C4</item>
+        <item name="colorSurfaceVariant">#12100C</item>
+        <item name="colorOnSurfaceVariant">#A89870</item>
+        <item name="colorOutline">#5B4522</item>
+        <item name="android:navigationBarColor">#050505</item>
+        <item name="android:statusBarColor">#050505</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.KouroshAe.AlertDialog</item>
@@ -39,7 +39,7 @@
       the Orbit console appears.
     -->
     <style name="Theme.KouroshAe.Starting" parent="Theme.KouroshAe">
-        <item name="android:windowBackground">#080808</item>
+        <item name="android:windowBackground">#050505</item>
    </style>
 
     <!--
@@ -58,9 +58,9 @@
 
     <style name="ThemeOverlay.KouroshAe.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.KouroshAe.Dialog</item>
-        <item name="colorSurface">#151515</item>
-        <item name="colorOnSurface">#F7F0DF</item>
-        <item name="colorPrimary">#E7B84B</item>
+        <item name="colorSurface">#0B0A08</item>
+        <item name="colorOnSurface">#F3E6C4</item>
+        <item name="colorPrimary">#F6D98B</item>
    </style>
 
     <style name="ShapeAppearance.KouroshAe.Dialog" parent="ShapeAppearance.Material3.MediumComponent">
