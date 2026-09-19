@@ -1293,11 +1293,15 @@ class MainActivity : Activity() {
         // opening splash; repeating it above a single connect button was upstream
         // furniture, not information. What belongs here is live state: a small
         // LED that mirrors the dial, plus the settings entry.
-        statusLed.layoutParams = LinearLayout.LayoutParams(dp(9), dp(9)).apply {
-            rightMargin = dp(8)
+        addView(label("♛", 18f, primary, TypefaceStyle.MEDIUM).apply {
+            setPadding(0, 0, dp(6), 0)
+            contentDescription = "Kourosh-AE"
+        })
+        statusLed.layoutParams = LinearLayout.LayoutParams(dp(7), dp(7)).apply {
+            rightMargin = dp(7)
         }
         addView(statusLed, statusLed.layoutParams)
-        addView(label(Strings.t("Kourosh-AE"), 13f, MUTED, TypefaceStyle.MEDIUM).apply {
+        addView(label(Strings.t("Kourosh-AE"), 14f, primary, TypefaceStyle.MEDIUM).apply {
             letterSpacing = spacing(0.14f)
         })
         addView(View(this@MainActivity), LinearLayout.LayoutParams(0, 1, 1f))
