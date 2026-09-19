@@ -5445,7 +5445,7 @@ class MainActivity : Activity() {
             leftMargin = dp(4); bottomMargin = dp(16)
         })
 
-        FontChoice.Family.entries.filter { it != FontChoice.Family.VAZIRMATN }.forEach { family ->
+        FontChoice.Family.entries.forEach { family ->
             val selected = FontChoice.current(this) == family
             val row = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL

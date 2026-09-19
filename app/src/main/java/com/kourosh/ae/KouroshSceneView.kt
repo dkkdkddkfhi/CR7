@@ -7,82 +7,76 @@ import android.view.View
 import kotlin.math.sin
 import kotlin.random.Random
 
-/** Lightweight animated scene layer behind the Home controls. No network or VPN state is touched. */
+/** Native Kourosh backdrop: gradients, depth rings, columns, particles and gold geometry. */
 class KouroshSceneView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
 ) : View(context, attrs) {
-    private val scene = BitmapFactory.decodeResource(resources, R.drawable.kourosh_scene_top)
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
-    private val overlay = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val particlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.argb(125, 246, 217, 139)
-        setShadowLayer(10f * resources.displayMetrics.density, 0f, 0f, Color.argb(120, 212, 166, 74))
-    }
-    private val sceneRect = RectF()
-    private var fadeShader: Shader? = null
-    private val particles = Array(42) { PointF(Random.nextFloat(), Random.nextFloat() * 0.78f) }
+    private val bg = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val gold = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = dp(1f) }
+    private val fill = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val particles = Array(36) { PointF(Random.nextFloat(), Random.nextFloat()) }
     private var phase = 0f
     private var running = false
     private val frame = object : Runnable {
         override fun run() {
             if (!running || !isShown) return
-            phase += 0.006f
+            phase += 0.008f
             invalidate()
             postDelayed(this, 33L)
         }
     }
 
-    init {
-        isClickable = false
-        setLayerType(LAYER_TYPE_SOFTWARE, null)
-    }
+    init { isClickable = false }
+    override fun onAttachedToWindow() { super.onAttachedToWindow(); running = true; post(frame) }
+    override fun onDetachedFromWindow() { running = false; removeCallbacks(frame); super.onDetachedFromWindow() }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        running = true
-        removeCallbacks(frame)
-        post(frame)
-    }
-
-    override fun onDetachedFromWindow() {
-        running = false
-        removeCallbacks(frame)
-        super.onDetachedFromWindow()
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        canvas.drawColor(Color.rgb(5, 5, 5))
-        val w = width.toFloat()
-        val h = height.toFloat().coerceAtMost(dp(430f))
-        if (scene != null && w > 0f && h > 0f) {
-            val scale = maxOf(w / scene.width, h / scene.height)
-            val drift = sin(phase * 0.7f) * dp(3f)
-            val sw = scene.width * scale
-            val sh = scene.height * scale
-            val left = (w - sw) / 2f + drift
-            val top = -dp(16f) + sin(phase * 0.45f) * dp(2f)
-            paint.alpha = 190
-            sceneRect.set(left, top, left + sw, top + sh)
-            canvas.drawBitmap(scene, null, sceneRect, paint)
+    override fun onDraw(c: Canvas) {
+        val w = width.toFloat(); val h = height.toFloat().coerceAtMost(dp(470f))
+        bg.shader = LinearGradient(0f, 0f, 0f, h, Color.rgb(3, 7, 10), Color.rgb(8, 6, 4), Shader.TileMode.CLAMP)
+        c.drawRect(0f, 0f, w, h, bg); bg.shader = null
+        val cx = w * .56f; val cy = h * .40f
+        // Low sun and concentric royal seal.
+        fill.color = Color.argb(30, 246, 217, 139)
+        c.drawCircle(cx, cy, dp(116f), fill)
+        gold.color = Color.argb(110, 246, 217, 139)
+        gold.strokeWidth = dp(1f)
+        for (i in 0..3) c.drawCircle(cx, cy, dp(74f + i * 13f), gold)
+        c.drawLine(cx - dp(150f), cy, cx + dp(150f), cy, gold)
+        c.drawLine(cx, cy - dp(150f), cx, cy + dp(150f), gold)
+        // Faravahar-inspired geometric wings, deliberately vector-drawn.
+        gold.strokeWidth = dp(2f)
+        val wingY = dp(54f)
+        c.drawArc(RectF(cx - dp(156f), wingY - dp(22f), cx, wingY + dp(30f)), 190f, 160f, false, gold)
+        c.drawArc(RectF(cx, wingY - dp(22f), cx + dp(156f), wingY + dp(30f)), 190f, 160f, false, gold)
+        for (i in 0..5) {
+            val offset = dp(18f + i * 22f)
+            c.drawLine(cx - offset, wingY + dp(8f), cx - offset - dp(20f), wingY + dp(18f + i * 2f), gold)
+            c.drawLine(cx + offset, wingY + dp(8f), cx + offset + dp(20f), wingY + dp(18f + i * 2f), gold)
         }
-        // A dark lower fade keeps the scene behind the live cards rather than competing with them.
-        overlay.shader = fadeShader
-        canvas.drawRect(0f, 0f, w, h, overlay)
-        overlay.shader = null
-        particles.forEachIndexed { index, p ->
-            val x = p.x * w + sin(phase + index) * dp(2f)
-            val y = p.y * h + sin(phase * 0.8f + index * 0.7f) * dp(2f)
-            val radius = dp(if (index % 5 == 0) 1.25f else 0.65f)
-            canvas.drawCircle(x, y, radius, particlePaint)
+        // Minimal shield emblem in the center.
+        val shield = Path().apply { moveTo(cx, cy - dp(54f)); lineTo(cx + dp(42f), cy - dp(34f)); lineTo(cx + dp(34f), cy + dp(34f)); lineTo(cx, cy + dp(58f)); lineTo(cx - dp(34f), cy + dp(34f)); lineTo(cx - dp(42f), cy - dp(34f)); close() }
+        fill.color = Color.argb(180, 8, 7, 5); c.drawPath(shield, fill)
+        gold.strokeWidth = dp(2f); c.drawPath(shield, gold)
+        // Abstract Persepolis columns and mountain horizon.
+        gold.strokeWidth = dp(1f); gold.color = Color.argb(65, 212, 166, 74)
+        val horizon = h * .73f
+        c.drawLine(0f, horizon, w, horizon, gold)
+        for (i in 0..4) {
+            val x = w * (.08f + i * .24f); val top = horizon - dp(55f + (i % 2) * 28f)
+            c.drawRect(x, top, x + dp(14f), horizon, gold)
+            c.drawLine(x - dp(5f), top, x + dp(19f), top, gold)
         }
+        // Gold dust with a slow, low-cost drift.
+        fill.color = Color.argb(145, 246, 217, 139)
+        particles.forEachIndexed { i, p ->
+            val x = p.x * w + sin(phase + i) * dp(2f)
+            val y = p.y * h + sin(phase * .7f + i) * dp(2f)
+            c.drawCircle(x, y, dp(if (i % 5 == 0) 1.2f else .55f), fill)
+        }
+        // Fade under the scene so the live controls remain the visual priority.
+        bg.shader = LinearGradient(0f, h * .46f, 0f, h, Color.argb(0, 4, 5, 6), Color.argb(250, 4, 5, 6), Shader.TileMode.CLAMP)
+        c.drawRect(0f, h * .42f, w, h, bg); bg.shader = null
     }
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        fadeShader = LinearGradient(0f, 0f, 0f, h.toFloat(), Color.argb(0, 5, 5, 5), Color.argb(245, 5, 5, 5), Shader.TileMode.CLAMP)
-    }
-
-    private fun dp(value: Float): Float = value * resources.displayMetrics.density
+    private fun dp(v: Float) = v * resources.displayMetrics.density
 }
