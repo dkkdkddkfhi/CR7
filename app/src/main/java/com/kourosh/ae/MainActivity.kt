@@ -553,18 +553,6 @@ class MainActivity : Activity() {
         // every launch is how the job gets re-registered after an app update — a
         // package replace clears JobScheduler's registrations for the app.
         ShardRefreshJob.schedule(this)
-        // And one opportunistic refresh now. The job's window is up to six hours
-        // wide; someone who installs the app and taps SHARD immediately should not
-        // have to wait for it. Returns without I/O if the list is already fresh.
-        ShardSubscription.refreshIfDue(this)
-        // Same trigger for the edge and geo-blocked lists. Separate file, separate
-        // ETag, same 6-hour floor — see [RemotePolicy]. Cheap enough to sit next to
-        // the subscription fetch: a 304 is a few hundred bytes.
-        RemotePolicy.refreshIfDue(this)
-        // And the Smart Split fragment profiles, on the same triggers and the
-        // same floor — see [SmartSplitSub]. Same shape: a 304 costs nothing.
-        SmartSplitSub.refreshIfDue(this)
-
         // Orbit console. Every control below is built in onCreate so a single
         // pass wires the whole screen; no XML layouts exist in this app.
         orbitDial = OrbitDialView(this, palette).apply {
@@ -747,12 +735,15 @@ class MainActivity : Activity() {
         // the user picks a language while the real UI is already behind it — not
         // a blank splash. Records a choice on any exit path, so it shows once.
         showLanguagePickerOnce()
-        // Reattach to a tunnel that is already up. Without this the dial opens in
-        // the disconnected state while the VPN is running, and the session timer
-        // would only start on the next status broadcast. [adoptRunningTunnel]
-        // keeps the elapsed time honest by reading the service's connect
-        // timestamp, and runs again on every resume — see its own comment.
+        // Reattach immediately to a tunnel that is already up. Network refreshes
+        // are queued after the first frame so a cold launch never waits behind I/O.
         if (!adoptRunningTunnel()) refreshPublicIp()
+        pageHost.post {
+            if (isFinishing || isDestroyed) return@post
+            ShardSubscription.refreshIfDue(this)
+            RemotePolicy.refreshIfDue(this)
+            SmartSplitSub.refreshIfDue(this)
+        }
     }
 
     override fun onStart() {
@@ -886,18 +877,18 @@ class MainActivity : Activity() {
             .alpha(1f)
             .scaleX(1f)
             .scaleY(1f)
-            .setDuration(500)
+            .setDuration(140)
             .setInterpolator(PathInterpolator(0.2f, 0f, 0f, 1f))
             .withEndAction {
                 logo.animate()
                     .scaleX(1.05f)
                     .scaleY(1.05f)
-                    .setDuration(700)
+                        .setDuration(180)
                     .setInterpolator(PathInterpolator(0.4f, 0f, 0.2f, 1f))
                     .withEndAction {
                         overlay.animate()
                             .alpha(0f)
-                            .setDuration(300)
+                            .setDuration(120)
                             .withEndAction {
                                 pageHost.removeView(overlay)
                                 orbitDial.requestFocus()
