@@ -862,25 +862,60 @@ class MainActivity : Activity() {
             setBackgroundColor(CANVAS)
             isClickable = true
         }
-        val logo = ImageView(this).apply {
-            setImageResource(R.drawable.kourosh_ae_logo)
-            contentDescription = getString(R.string.app_name)
-            scaleType = ScaleType.FIT_CENTER
+        // Keep launch artwork native: the old image-only splash made the first
+        // screen look unchanged even after the Home scene had been rebuilt.
+        // KouroshSceneView supplies the animated heritage background immediately,
+        // while the brand lockup gives the user a clear, fast entry state.
+        overlay.addView(KouroshSceneView(this), FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT,
+        ))
+        val lockup = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER_HORIZONTAL
             alpha = 0f
-            scaleX = 0.82f
-            scaleY = 0.82f
+            scaleX = 0.94f
+            scaleY = 0.94f
         }
-        overlay.addView(logo, FrameLayout.LayoutParams(dp(198), dp(276), Gravity.CENTER))
+        val title = TextView(this).apply {
+            text = "KOUROSH-AE"
+            textSize = 28f
+            setTextColor(Color.parseColor("#F6D98B"))
+            gravity = Gravity.CENTER
+            letterSpacing = 0.16f
+            typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
+        }
+        val subtitle = TextView(this).apply {
+            text = Strings.t("PRIVATE NETWORK")
+            textSize = 11f
+            setTextColor(Color.parseColor("#A89870"))
+            gravity = Gravity.CENTER
+            letterSpacing = 0.28f
+            setPadding(0, dp(8), 0, 0)
+        }
+        lockup.addView(title, LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+        ))
+        lockup.addView(subtitle, LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+        ))
+        overlay.addView(lockup, FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            Gravity.CENTER,
+        ).apply { leftMargin = dp(24); rightMargin = dp(24) })
         pageHost.addView(overlay)
 
-        logo.animate()
+        lockup.animate()
             .alpha(1f)
             .scaleX(1f)
             .scaleY(1f)
             .setDuration(140)
             .setInterpolator(PathInterpolator(0.2f, 0f, 0f, 1f))
             .withEndAction {
-                logo.animate()
+                lockup.animate()
                     .scaleX(1.05f)
                     .scaleY(1.05f)
                         .setDuration(180)
